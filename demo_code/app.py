@@ -26,22 +26,17 @@ from utils.constants import COCO_PANOPTIC_CLASSES
 
 from tasks import *
 
-def parse_option():
-    parser = argparse.ArgumentParser('SEEM Demo', add_help=False)
-    parser.add_argument('--conf_files', default="configs/seem/seem_focalt_lang.yaml", metavar="FILE", help='path to config file', )
-    args = parser.parse_args()
 
-    return args
+conf_files = "configs/seem/seem_focalt_lang.yaml"
 
 '''
 build args
 '''
-# args = parse_option()
-# opt = load_opt_from_config_files(args.conf_files)
-# opt = init_distributed(opt)
+opt = load_opt_from_config_files(conf_files)
+opt = init_distributed(opt)
 
 # META DATA
-if 'focalt' in args.conf_files:
+if 'focalt' in conf_files:
     pretrained_pth = os.path.join("seem_focalt_v1.pt")
     if not os.path.exists(pretrained_pth):
         os.system("wget {}".format("https://projects4jw.blob.core.windows.net/x-decoder/release/seem_focalt_v1.pt"))
